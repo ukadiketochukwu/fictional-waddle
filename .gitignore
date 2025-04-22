@@ -1,0 +1,47 @@
+# Python-related files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.db
+*.sqlite3
+
+# Virtual environment
+venv/
+env/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Django-specific files
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3  # SQLite DB, if you're using it locally
+staticfiles/  # Local static files for production (managed by Azure)
+media/        # User-uploaded files, stored in Azure Blob Storage
+*.pid
+*.seed
+*.gz
+*.tgz
+*.zip
+
+# Environment variables
+.env   # Store your sensitive environment variables in this file
+.env.*  # Optional: In case you have multiple environment files (e.g., .env.dev, .env.prod)
+
+# Azure App Service
+*.bak
+*.swp
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# Other system files
+.DS_Store    # macOS
+Thumbs.db    # Windows
