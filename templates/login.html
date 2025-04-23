@@ -1,15 +1,58 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
+  <div class="auth-container">
+    <div class="auth-card">
+      <h1 class="auth-title">Welcome Back</h1>
+      <p class="auth-subtitle">Please enter your credentials to login</p>
+      
+      <form method="post" class="auth-form">
+        {% csrf_token %}
+        
+        {% if form.non_field_errors %}
+        <div class="form-error">
+          {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+        
+        <div class="form-group">
+          <label for="{{ form.username.id_for_label }}" class="form-label">
+            Username
+          </label>
+          {{ form.username }}
+          {% if form.username.errors %}
+          <div class="error-message">{{ form.username.errors }}</div>
+          {% endif %}
+        </div>
+        
+        <div class="form-group">
+          <label for="{{ form.password.id_for_label }}" class="form-label">
+            Password
+          </label>
+          {{ form.password }}
+          {% if form.password.errors %}
+          <div class="error-message">{{ form.password.errors }}</div>
+          {% endif %}
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="auth-button">Log In</button>
+        </div>
+        
+        <div class="auth-footer">
+          <p>Don't have an account? <a href="#">Sign up</a></p>
+          <a href="#" class="forgot-password">Forgot password?</a>
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
 </html>

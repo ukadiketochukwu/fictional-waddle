@@ -1,17 +1,74 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | FreightLink</title>
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <h2>Welcome, {{ user.username }}</h2>
-  <p>Your role is: {{ user.role }}</p>
-  {% if user.role == "load_owner" %}
-    <p>Load Owner Dashboard</p>
-  {% else %}
-    <p>Truck Owner Dashboard</p>
-  {% endif %}
-  <a href="{% url 'logout' %}">Logout</a>
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <div class="user-info">
+        <h1>Welcome back, <span class="username">{{ user.username }}</span></h1>
+        <div class="user-role-badge">
+          <i class="fas fa-user-tag"></i>
+          <span>{{ user.role|title }}</span>
+        </div>
+      </div>
+      <a href="{% url 'logout' %}" class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </a>
+    </header>
+
+    <main class="dashboard-content">
+      {% if user.role == "load_owner" %}
+        <section class="dashboard-section load-owner-dashboard">
+          <h2><i class="fas fa-boxes"></i> Load Owner Dashboard</h2>
+          <div class="dashboard-cards">
+            <div class="dashboard-card">
+              <i class="fas fa-shipping-fast"></i>
+              <h3>Active Shipments</h3>
+              <p>5 in progress</p>
+            </div>
+            <div class="dashboard-card">
+              <i class="fas fa-file-invoice-dollar"></i>
+              <h3>Pending Quotes</h3>
+              <p>3 requests</p>
+            </div>
+            <div class="dashboard-card">
+              <i class="fas fa-history"></i>
+              <h3>Shipment History</h3>
+              <p>24 completed</p>
+            </div>
+          </div>
+        </section>
+      {% else %}
+        <section class="dashboard-section truck-owner-dashboard">
+          <h2><i class="fas fa-truck"></i> Truck Owner Dashboard</h2>
+          <div class="dashboard-cards">
+            <div class="dashboard-card">
+              <i class="fas fa-road"></i>
+              <h3>Active Jobs</h3>
+              <p>2 in progress</p>
+            </div>
+            <div class="dashboard-card">
+              <i class="fas fa-search-dollar"></i>
+              <h3>Available Loads</h3>
+              <p>12 nearby</p>
+            </div>
+            <div class="dashboard-card">
+              <i class="fas fa-calendar-check"></i>
+              <h3>Earnings</h3>
+              <p>$3,850 this month</p>
+            </div>
+          </div>
+        </section>
+      {% endif %}
+    </main>
+  </div>
 </body>
 </html>

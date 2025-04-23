@@ -30,3 +30,7 @@ def logout_view(request):
 
 def dashboard_view(request):
     return render(request, 'dashboard.html', {'user': request.user})
+
+
+def index_view(request):
+    return render(request, 'index.html')

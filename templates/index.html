@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FreightLink - Connect Shippers with Carriers</title>
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header class="main-header">
+    <div class="container">
+      <nav class="navbar">
+        <div class="logo">
+          <i class="fas fa-truck-moving"></i>
+          <span>FreightLink</span>
+        </div>
+        <div class="auth-links">
+          <a href="{% url 'login' %}" class="btn btn-outline">Log In</a>
+          <a href="{% url 'register' %}" class="btn btn-primary">Sign Up</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Connecting Shippers with Reliable Carriers</h1>
+          <p class="subtitle">Streamline your freight operations with our digital logistics platform</p>
+          <div class="cta-buttons">
+            <a href="{% url 'register' %}?role=load_owner" class="btn btn-primary btn-large">
+              <i class="fas fa-boxes"></i> I Need to Ship
+            </a>
+            <a href="{% url 'register' %}?role=truck_owner" class="btn btn-secondary btn-large">
+              <i class="fas fa-truck"></i> I Have a Truck
+            </a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="{% static 'images/hero-truck.png' %}" alt="Freight truck on highway">
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="container">
+        <h2>Why Choose FreightLink?</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-bolt"></i>
+            </div>
+            <h3>Instant Matching</h3>
+            <p>Our smart algorithm connects you with the perfect shipping partners in seconds.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>Real-Time Tracking</h3>
+            <p>Monitor your shipments every step of the way with our live tracking system.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>Secure Payments</h3>
+            <p>Safe, transparent transactions with our escrow payment system.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="logo">
+            <i class="fas fa-truck-moving"></i>
+            <span>FreightLink</span>
+          </div>
+          <p>Connecting the logistics ecosystem</p>
+        </div>
+        <div class="footer-links">
+          <a href="#">About Us</a>
+          <a href="#">Contact</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 FreightLink. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
