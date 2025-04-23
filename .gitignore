@@ -13,6 +13,8 @@ env/
 ENV/
 env.bak/
 venv.bak/
+.env
+fille
 
 # Django-specific files
 *.log
