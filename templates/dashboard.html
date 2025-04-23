@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <h2>Welcome, {{ user.username }}</h2>
+  <p>Your role is: {{ user.role }}</p>
+  {% if user.role == "load_owner" %}
+    <p>Load Owner Dashboard</p>
+  {% else %}
+    <p>Truck Owner Dashboard</p>
+  {% endif %}
+  <a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>
