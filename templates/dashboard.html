@@ -48,7 +48,11 @@
               <h3>Shipment History</h3>
               <p>24 completed</p>
             </div>
-            <a href="{% url 'create-load' %}">Post a New Load</a>
+            <div class="dashboard-card">
+              <i class="fas fa-box"></i>
+              <h3>Post a New Load</h3>
+              <a href="{% url 'create-load' %}">New Load</a>
+            </div>
           </div>
         </section>
       {% else %}
@@ -70,7 +74,11 @@
               <h3>Earnings</h3>
               <p>$3,850 this month</p>
             </div>
-            <a href="{% url 'create-truck' %}">Post a New Truck</a>
+            <div class="dashboard-card">
+              <i class="fas fa-truck"></i>
+              <h3>Post a New Truck</h3>
+              <a href="{% url 'create-truck' %}">New Truck</a>
+            </div>
           </div>
         </section>
       {% endif %}
