@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import UserCreationForm, LoginForm
+from django.contrib.auth.decorators import login_required
 
 def register_view(request):
     if request.method == 'POST':
@@ -28,7 +29,11 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
+@login_required(login_url='login')
 def dashboard_view(request):
+    if request.user.role not in ['load_owner', 'truck_owner']:
+        return redirect('login')
+    
     return render(request, 'dashboard.html', {'user': request.user})
 
 

@@ -25,6 +25,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['myuniquetestdjangoapp123.azurewebsites.net', '*']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://myuniquetestdjangoapp123.azurewebsites.net', '*'
+]
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'Lax'
+
 
 # Application definition
 
