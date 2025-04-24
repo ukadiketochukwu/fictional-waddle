@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register New Truck | FreightLink</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/truck_create.css' %}">
+</head>
+<body>
+  <header class="truck-header">
+    <div class="truck-header-container">
+      <a href="#" class="truck-logo">
+        <i class="fas fa-truck-moving"></i>
+        <span>FreightLink</span>
+      </a>
+      <nav class="truck-nav">
+        <a href="{% url 'dashboard' %}" class="truck-nav-link">
+          <i class="fas fa-tachometer-alt"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="{% url 'logout' %}" class="truck-nav-link">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="truck-main">
+    <div class="truck-form-container">
+      <div class="truck-form-header">
+        <h1>
+          <i class="fas fa-truck"></i>
+          Register New Truck
+        </h1>
+        <p>Add your truck to start receiving load matches</p>
+      </div>
+
+      <form method="post" class="truck-form">
+        {% csrf_token %}
+        
+        {% if form.non_field_errors %}
+        <div class="truck-form-errors">
+          {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+
+        <div class="truck-form-group">
+          <label class="truck-form-label">
+            Truck Name/Model
+            <span class="truck-form-required">*</span>
+          </label>
+          <input type="text" name="title" class="truck-form-input" required>
+          {% if form.title.errors %}
+          <div class="truck-form-errors">{{ form.title.errors }}</div>
+          {% endif %}
+        </div>
+
+        <div class="truck-form-group">
+          <label class="truck-form-label">
+            Capacity (kg)
+            <span class="truck-form-required">*</span>
+          </label>
+          <input type="number" name="capacity" class="truck-form-input" required>
+          <small class="truck-form-help">Maximum weight your truck can carry</small>
+          {% if form.capacity.errors %}
+          <div class="truck-form-errors">{{ form.capacity.errors }}</div>
+          {% endif %}
+        </div>
+
+        <div class="truck-form-group">
+          <label class="truck-form-label">
+            Current Location
+            <span class="truck-form-required">*</span>
+          </label>
+          <input type="text" name="location" class="truck-form-input" required>
+          <small class="truck-form-help">City or region where your truck is based</small>
+          {% if form.location.errors %}
+          <div class="truck-form-errors">{{ form.location.errors }}</div>
+          {% endif %}
+        </div>
+
+        <button type="submit" class="truck-form-submit">
+          <i class="fas fa-save"></i>
+          Register Truck
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="truck-footer">
+    &copy; 2023 FreightLink. All rights reserved.
+  </footer>
+</body>
+</html>

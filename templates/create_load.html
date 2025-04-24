@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create New Load | FreightLink</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/load_create.css' %}">
+</head>
+<body>
+  <header class="load-header">
+    <div class="load-header-container">
+      <a href="#" class="load-logo">
+        <i class="fas fa-truck-moving"></i>
+        <span>FreightLink</span>
+      </a>
+      <nav class="load-nav">
+        <a href="{% url 'dashboard' %}" class="load-nav-link">
+          <i class="fas fa-tachometer-alt"></i>
+          <span>Dashboard</span>
+        </a>
+        <a href="{% url 'logout' %}" class="load-nav-link">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="load-main">
+    <div class="load-form-container">
+      <div class="load-form-header">
+        <h1>
+          <i class="fas fa-boxes"></i>
+          Create New Load
+        </h1>
+        <p>List your shipment to connect with available carriers</p>
+      </div>
+
+      <form method="post" class="load-form">
+        {% csrf_token %}
+        
+        {% if form.non_field_errors %}
+        <div class="load-form-errors">
+          {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+
+        <div class="load-form-group">
+          <label class="load-form-label">
+            Description
+            <span class="load-form-required">*</span>
+          </label>
+          <textarea name="description" class="load-form-input load-form-textarea" required></textarea>
+          <small class="load-form-help">Describe what you're shipping</small>
+          {% if form.description.errors %}
+          <div class="load-form-errors">{{ form.description.errors }}</div>
+          {% endif %}
+        </div>
+
+        <div class="load-form-group">
+          <label class="load-form-label">
+            Weight (kg)
+            <span class="load-form-required">*</span>
+          </label>
+          <input type="number" name="weight" class="load-form-input" required>
+          <small class="load-form-help">Total weight of the shipment</small>
+          {% if form.weight.errors %}
+          <div class="load-form-errors">{{ form.weight.errors }}</div>
+          {% endif %}
+        </div>
+
+        <div class="load-form-group">
+          <label class="load-form-label">
+            Pickup Location
+            <span class="load-form-required">*</span>
+          </label>
+          <input type="text" name="pickup_location" class="load-form-input" required>
+          <small class="load-form-help">Where carriers will collect the load</small>
+          {% if form.pickup_location.errors %}
+          <div class="load-form-errors">{{ form.pickup_location.errors }}</div>
+          {% endif %}
+        </div>
+
+        <div class="load-form-group">
+          <label class="load-form-label">
+            Dropoff Location
+            <span class="load-form-required">*</span>
+          </label>
+          <input type="text" name="dropoff_location" class="load-form-input" required>
+          <small class="load-form-help">Final destination for the load</small>
+          {% if form.dropoff_location.errors %}
+          <div class="load-form-errors">{{ form.dropoff_location.errors }}</div>
+          {% endif %}
+        </div>
+
+        <button type="submit" class="load-form-submit">
+          <i class="fas fa-save"></i>
+          Create Load
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="load-footer">
+    &copy; 2023 FreightLink. All rights reserved.
+  </footer>
+</body>
+</html>

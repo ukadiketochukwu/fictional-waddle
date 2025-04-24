@@ -18,7 +18,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+#SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY='django-insecure-m+nnl0yzsrd4)q5=vv1j-%i&ksg%k2x04jr-nqr2)29fu*0by9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -26,12 +27,11 @@ DEBUG = True
 ALLOWED_HOSTS = ['myuniquetestdjangoapp123.azurewebsites.net', '*']
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://myuniquetestdjangoapp123.azurewebsites.net', '*'
+    'https://myuniquetestdjangoapp123.azurewebsites.net'
 ]
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SAMESITE = 'Lax'
 
 
 # Application definition

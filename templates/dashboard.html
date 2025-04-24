@@ -16,7 +16,11 @@
         <h1>Welcome back, <span class="username">{{ user.username }}</span></h1>
         <div class="user-role-badge">
           <i class="fas fa-user-tag"></i>
-          <span>{{ user.role|title }}</span>
+          {% if user.role == "truck_owner" %}
+            <span>I own Trucks</span>
+          {% elif user.role == "load_owner" %}
+            <span>I have Loads</span>
+          {% endif %}
         </div>
       </div>
       <a href="{% url 'logout' %}" class="logout-btn">
@@ -44,6 +48,7 @@
               <h3>Shipment History</h3>
               <p>24 completed</p>
             </div>
+            <a href="{% url 'create-load' %}">Post a New Load</a>
           </div>
         </section>
       {% else %}
@@ -65,6 +70,7 @@
               <h3>Earnings</h3>
               <p>$3,850 this month</p>
             </div>
+            <a href="{% url 'create-truck' %}">Post a New Truck</a>
           </div>
         </section>
       {% endif %}
