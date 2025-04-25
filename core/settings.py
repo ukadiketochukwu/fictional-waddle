@@ -27,7 +27,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['myuniquetestdjangoapp123.azurewebsites.net', '*']
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://myuniquetestdjangoapp123.azurewebsites.net'
+    'https://myuniquetestdjangoapp123.azurewebsites.net', 'http://127.0.0.1:8000/'
 ]
 
 CSRF_COOKIE_SECURE = False
@@ -106,7 +106,6 @@ DATABASES = {
         },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

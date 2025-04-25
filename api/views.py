@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
+
+from api.models import Load, Truck
 from .forms import UserCreationForm, LoginForm
 from django.contrib.auth.decorators import login_required
 from .forms import TruckForm, LoadForm
@@ -41,7 +43,7 @@ def dashboard_view(request):
     if request.user.role not in ['load_owner', 'truck_owner']:
         return redirect('login')
     
-    '''if request.user.role == 'truck_owner':
+    if request.user.role == 'truck_owner':
 
         my_trucks = Truck.objects.filter(owner=request.user)
         all_loads = Load.objects.all()
@@ -51,17 +53,29 @@ def dashboard_view(request):
             'loads': all_loads
         })
 
-    if request.user.role != 'load_owner':
+    if request.user.role == 'load_owner':
 
         my_loads = Load.objects.filter(owner=request.user)
         all_trucks = Truck.objects.all()
+        print(my_loads)
+        print(all_trucks)
+
 
         return render(request, 'dashboard_load.html', {
             'my_loads': my_loads,
             'trucks': all_trucks
-        })'''
+        })
     
     return render(request, 'dashboard.html', {'user': request.user})
+
+
+@login_required(login_url='login')
+def service_view(request):
+    if request.user.role not in ['load_owner', 'truck_owner']:
+        return redirect('login')
+    
+    
+    return render(request, 'service.html', {'user': request.user})
 
 @login_required
 def create_truck_view(request):

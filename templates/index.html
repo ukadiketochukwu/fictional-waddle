@@ -18,8 +18,22 @@
           <span>FreightLink</span>
         </div>
         <div class="auth-links">
-          <a href="{% url 'login' %}" class="btn btn-outline">Log In</a>
-          <a href="{% url 'register' %}" class="btn btn-primary">Sign Up</a>
+          {% if user.is_authenticated %}
+            <div class="user-welcome">
+              <a href='#' class="btn btn-basic">
+                <i class="fas fa-user-alt"></i> {{ user.username|capfirst }}
+              </a>
+              <a href="{% url 'dashboard' %}" class="btn btn-primary">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+              </a>
+              <a href="{% url 'logout' %}" class="btn btn-outline">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </a>
+            </div>
+          {% else %}
+            <a href="{% url 'login' %}" class="btn btn-outline">Log In</a>
+            <a href="{% url 'register' %}" class="btn btn-primary">Sign Up</a>
+          {% endif %}
         </div>
       </nav>
     </div>
@@ -32,12 +46,27 @@
           <h1>Connecting Shippers with Reliable Carriers</h1>
           <p class="subtitle">Streamline your freight operations with our digital logistics platform</p>
           <div class="cta-buttons">
-            <a href="{% url 'register' %}?role=load_owner" class="btn btn-primary btn-large">
-              <i class="fas fa-boxes"></i> I Need to Ship
-            </a>
-            <a href="{% url 'register' %}?role=truck_owner" class="btn btn-secondary btn-large">
-              <i class="fas fa-truck"></i> I Have a Truck
-            </a>
+            {% if not user.is_authenticated %}
+              <a href="{% url 'register' %}?role=load_owner" class="btn btn-primary btn-large">
+                <i class="fas fa-boxes"></i> I Need to Ship
+              </a>
+              <a href="{% url 'register' %}?role=truck_owner" class="btn btn-secondary btn-large">
+                <i class="fas fa-truck"></i> I Have a Truck
+              </a>
+            {% else %}
+              {% if user.role == 'load_owner' %}
+                <a href="{% url 'create-load' %}" class="btn btn-primary btn-large">
+                  <i class="fas fa-plus"></i> Create New Load
+                </a>
+              {% else %}
+                <a href="{% url 'create-truck' %}" class="btn btn-primary btn-large">
+                  <i class="fas fa-plus"></i> Add New Truck
+                </a>
+              {% endif %}
+              <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-large">
+                <i class="fas fa-tachometer-alt"></i> Go to Dashboard
+              </a>
+            {% endif %}
           </div>
         </div>
         <div class="hero-image">
