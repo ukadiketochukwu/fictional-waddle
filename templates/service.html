@@ -18,7 +18,7 @@
 
     <header class="dashboard-header">
       <div class="user-info">
-        <h1>Welcome back, <span class="username">{{ user.username }}</span></h1>
+        <h1>Welcome back, <span class="username">{{ user.username|upper }}</span></h1>
         <div class="user-role-badge">
           <i class="fas fa-user-tag"></i>
           {% if user.role == "truck_owner" %}
