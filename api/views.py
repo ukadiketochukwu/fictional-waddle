@@ -13,6 +13,9 @@ def index_view(request):
     return render(request, 'index.html')
 
 def register_view(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -24,6 +27,10 @@ def register_view(request):
     return render(request, 'register.html', {'form': form})
 
 def login_view(request):
+
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+
     if request.method == 'POST':
         form = LoginForm(request, data=request.POST)
         if form.is_valid():

@@ -5,12 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard | FreightLink</title>
-  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+  <link rel="stylesheet" href="{% static 'css/services.css' %}">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
   <div class="dashboard-container">
+    <!-- Mobile Menu Button (Added for mobile) -->
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+      <i class="fas fa-bars"></i>
+    </button>
+
     <header class="dashboard-header">
       <div class="user-info">
         <h1>Welcome back, <span class="username">{{ user.username }}</span></h1>
@@ -24,65 +29,75 @@
         </div>
       </div>
       <a href="{% url 'logout' %}" class="logout-btn">
-        <i class="fas fa-sign-out-alt"></i> Logout
+        <i class="fas fa-sign-out-alt"></i> <span class="logout-text">Logout</span>
       </a>
     </header>
 
     <main class="dashboard-content">
       {% if user.role == "load_owner" %}
         <section class="dashboard-section load-owner-dashboard">
-          <h2><i class="fas fa-boxes"></i> Load Owner Services</h2>
+          <h2><i class="fas fa-boxes"></i> <span>Load Owner Services</span></h2>
           <div class="dashboard-cards">
             <div class="dashboard-card">
               <i class="fas fa-shipping-fast"></i>
               <h3>Active Shipments</h3>
               <p>5 in progress</p>
+              <a href="#" class="card-link">View Details</a>
             </div>
             <div class="dashboard-card">
               <i class="fas fa-file-invoice-dollar"></i>
               <h3>Pending Quotes</h3>
               <p>3 requests</p>
+              <a href="#" class="card-link">View Requests</a>
             </div>
             <div class="dashboard-card">
               <i class="fas fa-history"></i>
               <h3>Shipment History</h3>
               <p>24 completed</p>
+              <a href="#" class="card-link">View History</a>
             </div>
-            <div class="dashboard-card">
+            <div class="dashboard-card highlight-card">
               <i class="fas fa-box"></i>
               <h3>Post a New Load</h3>
-              <a href="{% url 'create-load' %}">New Load</a>
+              <p>Get quotes instantly</p>
+              <a href="{% url 'create-load' %}" class="btn btn-primary">New Load</a>
             </div>
           </div>
         </section>
       {% else %}
         <section class="dashboard-section truck-owner-dashboard">
-          <h2><i class="fas fa-truck"></i> Truck Owner Services</h2>
+          <h2><i class="fas fa-truck"></i> <span>Truck Owner Services</span></h2>
           <div class="dashboard-cards">
             <div class="dashboard-card">
               <i class="fas fa-road"></i>
               <h3>Active Jobs</h3>
               <p>2 in progress</p>
+              <a href="#" class="card-link">View Jobs</a>
             </div>
             <div class="dashboard-card">
               <i class="fas fa-search-dollar"></i>
               <h3>Available Loads</h3>
               <p>12 nearby</p>
+              <a href="#" class="card-link">Browse Loads</a>
             </div>
             <div class="dashboard-card">
               <i class="fas fa-calendar-check"></i>
               <h3>Earnings</h3>
               <p>$3,850 this month</p>
+              <a href="#" class="card-link">View Earnings</a>
             </div>
-            <div class="dashboard-card">
+            <div class="dashboard-card highlight-card">
               <i class="fas fa-truck"></i>
               <h3>Post a New Truck</h3>
-              <a href="{% url 'create-truck' %}">New Truck</a>
+              <p>Find loads faster</p>
+              <a href="{% url 'create-truck' %}" class="btn btn-primary">New Truck</a>
             </div>
           </div>
         </section>
       {% endif %}
     </main>
   </div>
+
+  <script src="{% static 'js/services.js' %}"></script>
 </body>
 </html>

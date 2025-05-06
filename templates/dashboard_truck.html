@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{% static 'css/dashboard_truck.css' %}">
 </head>
 <body>
-    <!-- Header -->
+    <!-- Header with Mobile Menu -->
     <header class="dashboard-header">
         <div class="dashboard-container">
             <div class="header-content">
@@ -19,18 +19,24 @@
                     <i class="fas fa-truck-moving"></i>
                     <span>FreightLink</span>
                 </a>
+                
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-toggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
                 <div class="nav-links">
                     <a href="{% url 'services' %}" class="nav-link">
                         <i class="far fa-star"></i>
-                        <span>Services</span>
+                        <span class="nav-text">Services</span>
                     </a>
                     <a href="{% url 'dashboard' %}" class="nav-link">
                         <i class="fas fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
+                        <span class="nav-text">Dashboard</span>
                     </a>
                     <a href="{% url 'logout' %}" class="nav-link">
                         <i class="fas fa-sign-out-alt"></i>
-                        <span>Logout</span>
+                        <span class="nav-text">Logout</span>
                     </a>
                 </div>
             </div>
@@ -51,7 +57,7 @@
                 </div>
                 <a href="{% url 'create-truck' %}" class="btn btn-primary">
                     <i class="fas fa-plus"></i>
-                    Add New Truck
+                    <span class="btn-text">Add New Truck</span>
                 </a>
             </div>
         </div>
@@ -62,39 +68,39 @@
             <div class="section">
                 <h3 class="section-title">
                     <i class="fas fa-truck truck-icon"></i>
-                    My Trucks
+                    <span>My Trucks</span>
                 </h3>
                 
                 {% if my_trucks %}
                 <div class="cards-grid">
                     {% for truck in my_trucks %}
-                    <div class="card">
+                    <div class="card truck-card">
                         <div class="card-body">
                             <h5 class="card-title">
                                 <i class="fas fa-truck me-2"></i>
-                                {{ truck.title }}
+                                <span>{{ truck.title }}</span>
                             </h5>
-                            <div class="d-flex justify-content-between mb-2">
+                            <div class="truck-info">
                                 <small class="text-muted">
                                     <i class="fas fa-weight-hanging me-1"></i>
-                                    Capacity: {{ truck.capacity }}kg
+                                    <span>Capacity: {{ truck.capacity }}kg</span>
                                 </small>
                                 <span class="badge bg-light text-dark badge-status">
                                     {% if truck.is_available %}Available{% else %}In Use{% endif %}
                                 </span>
                             </div>
-                            <div class="d-flex align-items-center mb-3">
+                            <div class="truck-location">
                                 <i class="fas fa-map-marker-alt me-2 text-muted"></i>
                                 <small>{{ truck.location }}</small>
                             </div>
-                            <div class="d-flex justify-content-between">
+                            <div class="truck-actions">
                                 <a href="#" class="btn btn-sm btn-outline-primary">
                                     <i class="fas fa-edit me-1"></i>
-                                    Edit
+                                    <span>Edit</span>
                                 </a>
                                 <a href="#" class="btn btn-sm btn-outline-danger">
                                     <i class="fas fa-trash me-1"></i>
-                                    Remove
+                                    <span>Remove</span>
                                 </a>
                             </div>
                         </div>
@@ -103,12 +109,12 @@
                 </div>
                 {% else %}
                 <div class="empty-state">
-                    <i class="fas fa-truck fa-3x mb-3"></i>
+                    <i class="fas fa-truck"></i>
                     <h5>No trucks registered yet</h5>
-                    <p class="mb-3">Add your first truck to start receiving load matches</p>
+                    <p>Add your first truck to start receiving load matches</p>
                     <a href="{% url 'create-truck' %}" class="btn btn-primary">
                         <i class="fas fa-plus me-2"></i>
-                        Add Truck
+                        <span>Add Truck</span>
                     </a>
                 </div>
                 {% endif %}
@@ -118,39 +124,37 @@
             <div class="section">
                 <h3 class="section-title">
                     <i class="fas fa-boxes load-icon"></i>
-                    Available Loads
+                    <span>Available Loads</span>
                 </h3>
                 
                 {% if loads %}
                 <div class="cards-grid">
                     {% for load in loads %}
-                    <div class="card">
+                    <div class="card load-card">
                         <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-start mb-2">
-                                <h6 class="card-title"> {{ load.description|truncatechars:60 }}</h6>
+                            <div class="load-header">
+                                <h6 class="card-title">{{ load.description|truncatechars:60 }}</h6>
                             </div>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div>
-                                    <small class="text-muted">
-                                        <i class="fas fa-map-marker-alt me-1"></i>
-                                        {{ load.pickup_location }}
-                                    </small>
-                                    <i class="fas fa-arrow-right mx-2 text-muted"></i>
-                                    <small class="text-muted">
-                                        <i class="fas fa-map-marker-alt me-1"></i>
-                                        {{ load.dropoff_location }}
-                                    </small>
-                                </div>
+                            <div class="load-locations">
+                                <small class="text-muted">
+                                    <i class="fas fa-map-marker-alt me-1"></i>
+                                    <span>{{ load.pickup_location }}</span>
+                                </small>
+                                <i class="fas fa-arrow-right mx-2 text-muted"></i>
+                                <small class="text-muted">
+                                    <i class="fas fa-map-marker-alt me-1"></i>
+                                    <span>{{ load.dropoff_location }}</span>
+                                </small>
                             </div>
-                            <hr class="my-2">
-                            <div class="d-flex justify-content-between">
+                            <hr class="divider">
+                            <div class="load-footer">
                                 <small class="text-muted">
                                     <i class="fas fa-weight-hanging me-1"></i>
-                                    {{ load.weight }}kg
+                                    <span>{{ load.weight }}kg</span>
                                 </small>
                                 <button class="btn btn-sm btn-outline-success">
                                     <i class="fas fa-handshake me-1"></i>
-                                    Accept Load
+                                    <span>Accept Load</span>
                                 </button>
                             </div>
                         </div>
@@ -159,7 +163,7 @@
                 </div>
                 {% else %}
                 <div class="empty-state">
-                    <i class="fas fa-box-open fa-3x mb-3"></i>
+                    <i class="fas fa-box-open"></i>
                     <h5>No loads available</h5>
                     <p>Check back later for available shipments</p>
                 </div>
@@ -170,9 +174,10 @@
 
     <!-- Footer -->
     <footer>
-        <small>&copy; 2025 FreightLink. All rights reserved.</small>
+        <small>&copy; <span class="current-year"></span> FreightLink. All rights reserved.</small>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/dashboard_truck.js' %}"></script>
 </body>
 </html>

@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FreightLink - Connect Shippers with Carriers</title>
   <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -17,17 +18,23 @@
           <i class="fas fa-truck-moving"></i>
           <span>FreightLink</span>
         </div>
+        
+        <!-- Mobile Menu Button -->
+        <button class="mobile-menu-button" aria-label="Toggle menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        
         <div class="auth-links">
           {% if user.is_authenticated %}
             <div class="user-welcome">
               <a href='#' class="btn btn-basic">
-                <i class="fas fa-user-alt"></i> {{ user.username|capfirst }}
+                <i class="fas fa-user-alt"></i> <span class="username">{{ user.username|capfirst }}</span>
               </a>
               <a href="{% url 'dashboard' %}" class="btn btn-primary">
-                <i class="fas fa-tachometer-alt"></i> Dashboard
+                <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
               </a>
               <a href="{% url 'logout' %}" class="btn btn-outline">
-                <i class="fas fa-sign-out-alt"></i> Logout
+                <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
               </a>
             </div>
           {% else %}
@@ -40,37 +47,47 @@
   </header>
 
   <main>
+    {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
     <section class="hero">
       <div class="container">
+        <div class="hero-image">
+          <img src="{% static 'images/hero-truck.png' %}" alt="Freight truck on highway" loading="lazy">
+        </div>
         <div class="hero-content">
           <h1>Connecting Shippers with Reliable Carriers</h1>
           <p class="subtitle">Streamline your freight operations with our digital logistics platform</p>
           <div class="cta-buttons">
             {% if not user.is_authenticated %}
               <a href="{% url 'register' %}?role=load_owner" class="btn btn-primary btn-large">
-                <i class="fas fa-boxes"></i> I Need to Ship
+                <i class="fas fa-boxes"></i> <span>I Need to Ship</span>
               </a>
               <a href="{% url 'register' %}?role=truck_owner" class="btn btn-secondary btn-large">
-                <i class="fas fa-truck"></i> I Have a Truck
+                <i class="fas fa-truck"></i> <span>I Have a Truck</span>
               </a>
             {% else %}
               {% if user.role == 'load_owner' %}
                 <a href="{% url 'create-load' %}" class="btn btn-primary btn-large">
-                  <i class="fas fa-plus"></i> Create New Load
+                  <i class="fas fa-plus"></i> <span>Create New Load</span>
                 </a>
               {% else %}
                 <a href="{% url 'create-truck' %}" class="btn btn-primary btn-large">
-                  <i class="fas fa-plus"></i> Add New Truck
+                  <i class="fas fa-plus"></i> <span>Add New Truck</span>
                 </a>
               {% endif %}
               <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-large">
-                <i class="fas fa-tachometer-alt"></i> Go to Dashboard
+                <i class="fas fa-tachometer-alt"></i> <span>Go to Dashboard</span>
               </a>
             {% endif %}
           </div>
-        </div>
-        <div class="hero-image">
-          <img src="{% static 'images/hero-truck.png' %}" alt="Freight truck on highway">
         </div>
       </div>
     </section>
@@ -123,9 +140,11 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2023 FreightLink. All rights reserved.</p>
+        <p>&copy; <span class="current-year"></span> FreightLink. All rights reserved.</p>
       </div>
     </div>
   </footer>
+
+  <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
